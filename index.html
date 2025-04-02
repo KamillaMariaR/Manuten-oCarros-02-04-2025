@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!-- Added link to CSS -->
+    <title>Garagem Interativa com Persistência</title> <!-- Changed Title -->
+</head>
+
+<body>
+    <main>
+        <h1>Garagem Interativa</h1> <!-- Changed Title -->
+
+        <!-- Section for Car -->
+        <section class="container">
+            <h2>Carro</h2>
+            <div id="carro-container">
+                <img id="carro-imagem" src="imagens/civic-removebg-preview.png" alt="Imagem do Carro">
+                <p id="carro-status">Desligado</p>
+                <div class="painel-velocidade">
+                    <div class="barra-velocidade">
+                        <div class="ponteiro" id="ponteiro-velocidade"></div>
+                    </div>
+                    <div class="velocidade-display" id="velocidade-valor">0 km/h</div>
+                    <div class="animacao-aceleracao" id="animacao-aceleracao-carro"></div>
+                    <div class="animacao-freagem" id="animacao-freagem-carro"></div>
+                </div>
+                <p id="carro-detalhes">Modelo: <span id="modelo"></span>, Cor: <span id="cor"></span></p>
+            </div>
+            <div> <!-- Input group -->
+                <input type="text" id="modeloCarro" placeholder="Modelo">
+                <input type="text" id="corCarro" placeholder="Cor">
+                <button onclick="garagem.criarCarro()">Criar/Atualizar Carro</button> <!-- Changed button text -->
+            </div>
+            <div id="botoes-meuCarro" class="botoes"> <!-- Added unique ID -->
+                <button onclick="garagem.interagirComVeiculo('meuCarro', 'ligar')" id="ligar-btn">Ligar</button>
+                <button onclick="garagem.interagirComVeiculo('meuCarro', 'desligar')" id="desligar-btn">Desligar</button>
+                <button onclick="garagem.interagirComVeiculo('meuCarro', 'acelerar')" id="acelerar-btn">Acelerar</button>
+                <button onclick="garagem.interagirComVeiculo('meuCarro', 'frear')" id="frear-btn">Frear</button>
+                <br> <!-- Line break for better layout -->
+                <input type="text" id="corPintura" placeholder="Nova Cor">
+                <button onclick="garagem.pintarVeiculo('meuCarro')" id="pintar-btn">Pintar</button>
+                <input type="number" id="combustivel" placeholder="Add Combustível (%)">
+                <button onclick="garagem.abastecerVeiculo('meuCarro')" id="abastecer-btn">Abastecer</button>
+            </div>
+             <!-- Maintenance Forms for Car -->
+            <div class="manutencao-forms-container">
+                <div class="manutencao-form">
+                    <h4>Registrar Manutenção Realizada (Carro)</h4>
+                    <input type="date" id="dataManutencaoCarro" title="Data da Manutenção">
+                    <input type="text" id="tipoManutencaoCarro" placeholder="Tipo de Serviço">
+                    <input type="number" id="custoManutencaoCarro" placeholder="Custo (R$)">
+                    <input type="text" id="descManutencaoCarro" placeholder="Descrição (Opcional)">
+                    <button onclick="garagem.registrarManutencao('meuCarro')">Registrar Concluída</button>
+                </div>
+                <div class="manutencao-form">
+                    <h4>Agendar Manutenção Futura (Carro)</h4>
+                    <input type="date" id="dataAgendamentoCarro" title="Data do Agendamento">
+                    <input type="time" id="horaAgendamentoCarro" title="Hora do Agendamento (Opcional)">
+                    <input type="text" id="tipoAgendamentoCarro" placeholder="Tipo de Serviço">
+                    <input type="text" id="obsAgendamentoCarro" placeholder="Observações (Opcional)">
+                    <button onclick="garagem.agendarManutencao('meuCarro')">Agendar</button>
+                </div>
+            </div>
+        </section>
+
+        <hr> <!-- Separator -->
+
+        <!-- Section for Sports Car -->
+        <section class="container">
+            <h2>Carro Esportivo</h2>
+            <div id="carroEsportivo-container">
+                <img id="carroEsportivo-imagem" src="imagens/paganiRosa-removebg-preview.png" alt="Imagem do Carro Esportivo">
+                <p id="carroEsportivo-status">Desligado</p>
+                <div class="painel-velocidade">
+                    <div class="barra-velocidade">
+                        <div class="ponteiro" id="ponteiro-carroEsportivo-velocidade"></div>
+                    </div>
+                    <div class="velocidade-display" id="carroEsportivo-velocidade-valor">0 km/h</div>
+                    <div class="animacao-aceleracao" id="animacao-aceleracao-carroEsportivo"></div>
+                    <div class="animacao-freagem" id="animacao-freagem-carroEsportivo"></div>
+                </div>
+                <p id="carroEsportivo-detalhes">Modelo: <span id="carroEsportivo-modelo"></span>, Cor: <span id="carroEsportivo-cor"></span></p>
+                 <p id="infoEsportivo"></p> <!-- Moved info para here -->
+            </div>
+             <div> <!-- Input group -->
+                 <input type="text" id="modeloEsportivo" placeholder="Modelo">
+                 <input type="text" id="corEsportivo" placeholder="Cor">
+                 <button onclick="garagem.criarCarroEsportivo()">Criar/Atualizar Carro Esportivo</button> <!-- Changed text -->
+             </div>
+            <div id="botoes-carroEsportivo" class="botoes">
+                <button onclick="garagem.interagirComVeiculo('carroEsportivo', 'ligar')" id="ligar-carroEsportivo-btn">Ligar</button>
+                <button onclick="garagem.interagirComVeiculo('carroEsportivo', 'desligar')" id="desligar-carroEsportivo-btn">Desligar</button>
+                <button onclick="garagem.interagirComVeiculo('carroEsportivo', 'acelerar')" id="acelerar-carroEsportivo-btn">Acelerar</button>
+                <button onclick="garagem.interagirComVeiculo('carroEsportivo', 'frear')" id="frear-carroEsportivo-btn">Frear</button>
+                <button onclick="garagem.interagirComVeiculo('carroEsportivo', 'ativarTurbo')">Ativar Turbo</button>
+                <button onclick="garagem.interagirComVeiculo('carroEsportivo', 'desativarTurbo')">Desativar Turbo</button>
+                <br>
+                <input type="text" id="corPinturaEsportivo" placeholder="Nova Cor">
+                <button onclick="garagem.pintarVeiculo('carroEsportivo')" id="pintar-carroEsportivo-btn">Pintar</button>
+                <input type="number" id="combustivelEsportivo" placeholder="Add Combustível (%)">
+                <button onclick="garagem.abastecerVeiculo('carroEsportivo')" id="abastecer-carroEsportivo-btn">Abastecer</button>
+            </div>
+             <!-- Maintenance Forms for Sports Car -->
+            <div class="manutencao-forms-container">
+                <div class="manutencao-form">
+                    <h4>Registrar Manutenção Realizada (Esportivo)</h4>
+                    <input type="date" id="dataManutencaoEsportivo" title="Data da Manutenção">
+                    <input type="text" id="tipoManutencaoEsportivo" placeholder="Tipo de Serviço">
+                    <input type="number" id="custoManutencaoEsportivo" placeholder="Custo (R$)">
+                    <input type="text" id="descManutencaoEsportivo" placeholder="Descrição (Opcional)">
+                    <button onclick="garagem.registrarManutencao('carroEsportivo')">Registrar Concluída</button>
+                </div>
+                <div class="manutencao-form">
+                    <h4>Agendar Manutenção Futura (Esportivo)</h4>
+                    <input type="date" id="dataAgendamentoEsportivo" title="Data do Agendamento">
+                    <input type="time" id="horaAgendamentoEsportivo" title="Hora do Agendamento (Opcional)">
+                    <input type="text" id="tipoAgendamentoEsportivo" placeholder="Tipo de Serviço">
+                    <input type="text" id="obsAgendamentoEsportivo" placeholder="Observações (Opcional)">
+                    <button onclick="garagem.agendarManutencao('carroEsportivo')">Agendar</button>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- Section for Truck -->
+        <section class="container">
+            <h2>Caminhão</h2>
+            <div id="caminhao-container">
+                <img id="caminhao-imagem" src="imagens/caminhão-removebg-preview.png" alt="Imagem do Caminhão">
+                <p id="caminhao-status">Desligado</p>
+                <div class="painel-velocidade">
+                    <div class="barra-velocidade">
+                        <div class="ponteiro" id="ponteiro-caminhao-velocidade"></div>
+                    </div>
+                    <div class="velocidade-display" id="caminhao-velocidade-valor">0 km/h</div>
+                    <div class="animacao-aceleracao" id="animacao-aceleracao-caminhao"></div>
+                    <div class="animacao-freagem" id="animacao-freagem-caminhao"></div>
+                </div>
+                <p id="caminhao-detalhes">Modelo: <span id="caminhao-modelo"></span>, Cor: <span id="caminhao-cor"></span>, Carga: <span id="caminhao-carga"></span></p>
+                 <p id="infoCaminhao"></p> <!-- Moved info para here -->
+            </div>
+             <div> <!-- Input group -->
+                 <input type="text" id="modeloCaminhao" placeholder="Modelo">
+                 <input type="text" id="corCaminhao" placeholder="Cor">
+                 <input type="number" id="capacidadeCarga" placeholder="Capacidade de Carga (kg)">
+                 <button onclick="garagem.criarCaminhao()">Criar/Atualizar Caminhão</button> <!-- Changed text -->
+            </div>
+            <div id="botoes-caminhao" class="botoes">
+                <button onclick="garagem.interagirComVeiculo('caminhao', 'ligar')" id="ligar-caminhao-btn">Ligar</button>
+                <button onclick="garagem.interagirComVeiculo('caminhao', 'desligar')" id="desligar-caminhao-btn">Desligar</button>
+                <button onclick="garagem.interagirComVeiculo('caminhao', 'acelerar')" id="acelerar-caminhao-btn">Acelerar</button>
+                <button onclick="garagem.interagirComVeiculo('caminhao', 'frear')" id="frear-caminhao-btn">Frear</button>
+                <br>
+                <input type="number" id="pesoCarga" placeholder="Peso Carga (kg)">
+                <button onclick="garagem.interagirComVeiculo('caminhao', 'carregar')">Carregar</button>
+                <input type="number" id="pesoDescarga" placeholder="Peso Descarga (kg)">
+                <button onclick="garagem.interagirComVeiculo('caminhao', 'descarregar')">Descarregar</button>
+                <br>
+                <input type="text" id="corPinturaCaminhao" placeholder="Nova Cor">
+                <button onclick="garagem.pintarVeiculo('caminhao')" id="pintar-caminhao-btn">Pintar</button>
+                <input type="number" id="combustivelCaminhao" placeholder="Add Combustível (%)">
+                <button onclick="garagem.abastecerVeiculo('caminhao')" id="abastecer-caminhao-btn">Abastecer</button>
+            </div>
+            <!-- Maintenance Forms for Truck -->
+            <div class="manutencao-forms-container">
+                <div class="manutencao-form">
+                    <h4>Registrar Manutenção Realizada (Caminhão)</h4>
+                    <input type="date" id="dataManutencaoCaminhao" title="Data da Manutenção">
+                    <input type="text" id="tipoManutencaoCaminhao" placeholder="Tipo de Serviço">
+                    <input type="number" id="custoManutencaoCaminhao" placeholder="Custo (R$)">
+                    <input type="text" id="descManutencaoCaminhao" placeholder="Descrição (Opcional)">
+                    <button onclick="garagem.registrarManutencao('caminhao')">Registrar Concluída</button>
+                </div>
+                <div class="manutencao-form">
+                    <h4>Agendar Manutenção Futura (Caminhão)</h4>
+                    <input type="date" id="dataAgendamentoCaminhao" title="Data do Agendamento">
+                    <input type="time" id="horaAgendamentoCaminhao" title="Hora do Agendamento (Opcional)">
+                    <input type="text" id="tipoAgendamentoCaminhao" placeholder="Tipo de Serviço">
+                    <input type="text" id="obsAgendamentoCaminhao" placeholder="Observações (Opcional)">
+                    <button onclick="garagem.agendarManutencao('caminhao')">Agendar</button>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- Section for Moto -->
+        <section class="container">
+            <h2>Moto</h2>
+            <div id="moto-container">
+                <img id="moto-imagem" src="imagens/kawasaki-Photoroom.png" alt="Imagem da Moto">
+                <p id="moto-status">Desligada</p>
+                <div class="painel-velocidade">
+                    <div class="barra-velocidade">
+                        <div class="ponteiro" id="ponteiro-moto-velocidade"></div>
+                    </div>
+                    <div class="velocidade-display" id="moto-velocidade-valor">0 km/h</div>
+                    <div class="animacao-aceleracao" id="animacao-aceleracao-moto"></div>
+                    <div class="animacao-freagem" id="animacao-freagem-moto"></div>
+                </div>
+                <p id="moto-detalhes">Modelo: <span id="moto-modelo"></span>, Cor: <span id="moto-cor"></span></p>
+                 <p id="infoMoto"></p> <!-- Moved info para here -->
+            </div>
+             <div> <!-- Input group -->
+                 <input type="text" id="modeloMoto" placeholder="Modelo">
+                 <input type="text" id="corMoto" placeholder="Cor">
+                 <button onclick="garagem.criarMoto()">Criar/Atualizar Moto</button> <!-- Changed text -->
+            </div>
+            <div id="botoes-moto" class="botoes">
+                <button onclick="garagem.interagirComVeiculo('moto', 'ligar')" id="ligar-moto-btn">Ligar</button>
+                <button onclick="garagem.interagirComVeiculo('moto', 'desligar')" id="desligar-moto-btn">Desligar</button>
+                <button onclick="garagem.interagirComVeiculo('moto', 'acelerar')" id="acelerar-moto-btn">Acelerar</button>
+                <button onclick="garagem.interagirComVeiculo('moto', 'frear')" id="frear-moto-btn">Frear</button>
+                <br>
+                <input type="text" id="corPinturaMoto" placeholder="Nova Cor">
+                <button onclick="garagem.pintarVeiculo('moto')" id="pintar-moto-btn">Pintar</button>
+                <input type="number" id="combustivelMoto" placeholder="Add Combustível (%)">
+                <button onclick="garagem.abastecerVeiculo('moto')" id="abastecer-moto-btn">Abastecer</button>
+            </div>
+             <!-- Maintenance Forms for Moto -->
+            <div class="manutencao-forms-container">
+                <div class="manutencao-form">
+                    <h4>Registrar Manutenção Realizada (Moto)</h4>
+                    <input type="date" id="dataManutencaoMoto" title="Data da Manutenção">
+                    <input type="text" id="tipoManutencaoMoto" placeholder="Tipo de Serviço">
+                    <input type="number" id="custoManutencaoMoto" placeholder="Custo (R$)">
+                    <input type="text" id="descManutencaoMoto" placeholder="Descrição (Opcional)">
+                    <button onclick="garagem.registrarManutencao('moto')">Registrar Concluída</button>
+                </div>
+                <div class="manutencao-form">
+                    <h4>Agendar Manutenção Futura (Moto)</h4>
+                    <input type="date" id="dataAgendamentoMoto" title="Data do Agendamento">
+                    <input type="time" id="horaAgendamentoMoto" title="Hora do Agendamento (Opcional)">
+                    <input type="text" id="tipoAgendamentoMoto" placeholder="Tipo de Serviço">
+                    <input type="text" id="obsAgendamentoMoto" placeholder="Observações (Opcional)">
+                    <button onclick="garagem.agendarManutencao('moto')">Agendar</button>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- Section for Scheduled Maintenance List -->
+        <section class="container">
+            <h2>Agendamentos Futuros</h2>
+            <ul id="listaAgendamentos">
+                <!-- Scheduled items will be added here by JS -->
+                 <li class="nenhum">Carregando agendamentos...</li> <!-- Placeholder -->
+            </ul>
+        </section>
+
+        <hr>
+
+        <!-- Section for Displaying Vehicle Info -->
+        <section class="container">
+            <h2>Exibir Informações do Veículo Selecionado</h2>
+            <div class="botoes">
+                <button onclick="garagem.exibirInformacoes('meuCarro')">Exibir Carro</button>
+                <button onclick="garagem.exibirInformacoes('carroEsportivo')">Exibir Carro Esportivo</button>
+                <button onclick="garagem.exibirInformacoes('caminhao')">Exibir Caminhão</button>
+                <button onclick="garagem.exibirInformacoes('moto')">Exibir Moto</button>
+            </div>
+            <div id="informacoesVeiculo">Selecione um veículo acima para ver seus detalhes e histórico de manutenção.</div> <!-- Default text -->
+        </section>
+
+    </main>
+    <script src="script.js"></script> <!-- Link to JS -->
+</body>
+
+</html>
